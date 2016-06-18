@@ -1,0 +1,53 @@
+{
+  "name": "thought-dev",
+  "version": "0.0.0",
+  "description": "Development-Mode for Thought",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nknapp/thought-dev.git"
+  },
+  "homepage": "https://github.com/nknapp/thought-dev",
+  "author": {
+    "name": "Nils Knappmeier",
+    "email": "npm@knappi.org",
+    "url": "https://github.com/nknapp"
+  },
+  "bugs": {
+    "url": "https://github.com/nknapp/thought-dev/issues"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "preformat": "standard --version || npm -g install standard",
+    "format": "standard --format",
+    "pretest": "standard --version || npm -g install standard",
+    "test": "mocha --recursive && standard",
+    "thought": "thought run -a",
+    "prethoughtcheck": "thought --version || npm -g install thought",
+    "thoughtcheck": "thought check-engines",
+    "version": "thoughtful changelog -o -a && npm run thought",
+    "preversion": "npm run thoughtcheck"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "ghooks": "^1.0.3",
+    "mocha": "^2.3.3",
+    "thoughtful-release": "^0.3.0"
+  },
+  "standard": {
+    "ignore": [
+      "test/fixtures/**"
+    ]
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "bin"
+  ],
+  "config": {
+    "ghooks": {
+      "pre-commit": "standard"
+    }
+  },
+  "keywords": [  ]
+}
