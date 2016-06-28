@@ -1,17 +1,14 @@
-/*!
- * thought-dev <https://github.com/nknapp/thought-dev>
- *
- * Copyright (c) 2016 Nils Knappmeier.
- * Released under the MIT license.
- */
+var Server = require('./lib/server.js')
+var RunThought = require('./lib/run-thought.js')
+var Watcher = require('./lib/watcher.js')
 
-'use strict'
+var cwd = process.cwd()
+var thoughtRunner = new RunThought(cwd)
+var server = new Server(cwd, 3000, thoughtRunner)
+var watcher = new Watcher(cwd, thoughtRunner)
 
-module.exports = thoughtDev
-/**
- * Describe your module here
- * @public
- */
-function thoughtDev () {
-  // body
-}
+watcher.on('updater', function (files) {
+  server.reload(files)
+})
+
+server.run()

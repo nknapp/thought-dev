@@ -1,0 +1,30 @@
+.hbs-partial {
+  font-size: 0.5em;
+}
+
+#partial-tree {
+  position: fixed;
+  left:0;
+  top:0;
+  width: 200px;
+}
+
+node-label.highlighted {
+  border: 1px solid red;
+}
+
+.markdown-body {
+  position: absolute;
+  left: 200px;
+  top:0
+}
+
+.highlight {
+  background-color: red;
+}
+
+partial-marker {
+  position: absolute;
+  border: 1px solid red;
+  background-color: rgba(255,0,0,0.25);
+}

@@ -1,0 +1,24 @@
+<script id='navTemplate' type='text/ractive'>
+    \{{>navTreeNode}}
+</script>
+<script id='navTreeNode' type='text/ractive'>
+    <nav>
+      <node-label class="\{{highlighted}}" on-click="label-click" on-mouseover-mousemove="label-enter" 
+      on-mouseout="label-leave">\{{name}}</node-label>
+      \{{#if children}}
+        <ul>
+          \{{#children}}
+            <li>\{{>navTemplate}}</li>
+          \{{/children}} 
+        </ul>
+      \{{/if}}
+    </nav>
+</script>
+
+<div id="partial-tree"></div>
+<div class="markdown-body">
+    {{{markdown}}}
+</div>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
+<script src="/assets/main.js"></script>
