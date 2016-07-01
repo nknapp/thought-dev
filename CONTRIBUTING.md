@@ -1,4 +1,5 @@
-<!-- partial name='contributing.md' -->
+<!-- part name='templates/CONTRIBUTING.md' -->
+<!-- part name='partials/contributing.md' -->
 ## Contributing
 
 Contributions and feedback are always welcome. The expected procedure is the following:
@@ -55,4 +56,5 @@ to change the text, please raise an issue there for discussion.
 
 [standard-image]: https://cdn.rawgit.com/feross/standard/master/badge.svg
 [standard-url]: https://github.com/feross/standard
-<!-- /partial -->
+<!-- /part -->
+<!-- /part -->

@@ -1,34 +1,35 @@
+<!-- part name='templates/README.md' -->
 # thought-dev 
 
-<!-- partial name='badges.md' -->
-<!-- partial name='badge/npm.md' -->
+<!-- part name='partials/badges.md' -->
+<!-- part name='partials/badge/npm.md' -->
 [![NPM version](https://badge.fury.io/js/thought-dev.svg)](http://badge.fury.io/js/thought-dev)
- <!-- /partial -->
- <!-- partial name='badge/travis.md' -->
+ <!-- /part -->
+<!-- part name='partials/badge/travis.md' -->
 [![Travis Build Status](https://travis-ci.org/nknapp/thought-dev.svg?branch=master)](https://travis-ci.org/nknapp/thought-dev)
-<!-- /partial -->
- <!-- partial name='badge/appveyor.md' -->
-<!-- /partial -->
- <!-- partial name='badge/coveralls.md' -->
+<!-- /part -->
+<!-- part name='partials/badge/appveyor.md' -->
+<!-- /part -->
+<!-- part name='partials/badge/coveralls.md' -->
 [![Coverage Status](https://img.shields.io/coveralls/nknapp/thought-dev.svg)](https://coveralls.io/r/nknapp/thought-dev)
 
-<!-- /partial -->
-<!-- /partial -->
+<!-- /part -->
+<!-- /part -->
 
 > Development-Mode for Thought
 
-<!-- partial name='overview.md' -->
-<!-- /partial -->
+<!-- part name='partials/overview.md' -->
+<!-- /part -->
 
-<!-- partial name='installation.md' -->
+<!-- part name='partials/installation.md' -->
 # Installation
 
 ```
 npm install thought-dev
 ```
-<!-- /partial -->
+<!-- /part -->
 
-<!-- partial name='usage.md' -->
+<!-- part name='partials/usage.md' -->
  
 ## Usage
 
@@ -43,43 +44,30 @@ This will generate the following output
 ```
 sdad
 ```
-<!-- /partial -->
+<!-- /part -->
 
-<!-- partial name='api.md' -->
+<!-- part name='partials/api.md' -->
 ##  API-reference
 
-<a name="thoughtDev"></a>
-### thoughtDev(options)
-Execute Thought in the current directory
 
-**Kind**: global function  
-**Api**: public  
+<!-- /part -->
 
-| Param | Type | Description |
-| --- | --- | --- |
-| options | <code>object</code> |  |
-| [options.callback] | <code>function</code> | a callback function that is called   whenever files have been updated. The list of files is provided as first parameter |
-| [options.cwd] | <code>string</code> | the working directory to use as project root |
+<!-- part name='partials/howitworks.md' -->
+<!-- /part -->
 
-
-<!-- /partial -->
-
-<!-- partial name='howitworks.md' -->
-<!-- /partial -->
-
-<!-- partial name='license.md' -->
+<!-- part name='partials/license.md' -->
 ## License
 
 `thought-dev` is published under the MIT-license. 
 See [LICENSE.md](LICENSE.md) for details.
-<!-- /partial -->
+<!-- /part -->
 
-<!-- partial name='changelog.md' -->
+<!-- part name='partials/changelog.md' -->
 ## Release-Notes
  
 For release notes, see [CHANGELOG.md](CHANGELOG.md)
- <!-- /partial -->
+ <!-- /part -->
 
 ## Contributing guidelines
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md).<!-- /part -->

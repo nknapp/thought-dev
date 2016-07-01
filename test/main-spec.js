@@ -17,5 +17,5 @@ var thoughtDev = require('../')
 describe('thought-dev:', function () {
   // Dummy
   thoughtDev
-  // body
+// body
 })

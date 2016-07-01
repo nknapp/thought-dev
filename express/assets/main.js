@@ -1,7 +1,7 @@
 'use strict'
 
 /* global $ */
-/* global Ractive */
+/* global hljs */
 
 var PartialMarker = document.registerElement('partial-marker')
 var TextWrapper = document.registerElement('text-wrapper')
@@ -11,15 +11,29 @@ class PartialTreeNode {
    *
    * @param name the partial name
    * @param {Comment} startComment the Comment node that starts the partial
-   * @param root
+   * @param parent
    */
-  constructor (name, startComment, root) {
+  constructor (name, startComment, parent) {
+    // z-index of the partial marker
+    this.zIndex = parent ? parent.zIndex + 1 : 1000
     this.name = name
     this.children = []
     this.elements = []
-    this.root = root
+    this.parent = parent
     this.startComment = startComment
     this.marker = new PartialMarker()
+    this.sourceHeader = $('#parts [data-part-name="' + name + '.hbs"]')
+    document.body.appendChild(this.marker)
+  }
+
+  fullPath () {
+    if (this.parent) {
+      const container = this.parent.fullPath()
+      $('<span/>').text(this.name).appendTo(container)
+      return container
+    } else {
+      return $('<div>')
+    }
   }
 
   /**
@@ -28,7 +42,7 @@ class PartialTreeNode {
    * @param {Comment} startComment the Comment node that starts this partial
    */
   addChild (name, startComment) {
-    const newChild = new PartialTreeNode(name, startComment, false)
+    const newChild = new PartialTreeNode(name, startComment, this)
     this.children.push(newChild)
     return newChild
   }
@@ -55,82 +69,80 @@ class PartialTreeNode {
       // Insert dummy-element to show position of the partial
       const dummyElement = $('<span>').attr('title', this.name).text(`(${this.name})`)[0]
       this.elements.push(dummyElement)
-      // Insert dummy after startcomment
-      this.startComment.parentNode.insertBefore(dummyElement, this.startComment.nextSibling)
+      this.start = dummyElement
+      this.end = dummyElement
     }
-    for (var i = 0; i < this.elements.length; i++) {
-      const el = this.elements[i]
-      if (el instanceof window.Text) {
-        let textWrapper = new TextWrapper()
-        el.parentNode.insertBefore(textWrapper, el)
-        textWrapper.appendChild(this.elements[i])
-        this.elements[i] = textWrapper
-      }
-      // Highlight when hovering
-      $(this.elements[i]).mouseenter(function (event) {
-        _this.highlight(true)
-      })
-      $(this.marker).mouseleave(function (event) {
-        _this.highlight(false)
-      })
-    }
+    setTimeout(function () {
+      _this.adjustMarker()
+    }, 1000)
   }
 
   highlight (enabled) {
     this.highlighted = enabled
-    console.log(this.highlighted)
-    if (enabled) {
-      if (this.marker.parentNode) {
-        return
-      }
-      var bounds
-      if (this.elements.length === 1) {
-        bounds = this.elements[0].getBoundingClientRect()
-      } else if (this.elements.length > 1) {
-        let range = document.createRange()
-        range.setStart(this.elements[0], 0)
-        range.setEnd(this.elements[this.elements.length - 1], 0)
-        bounds = range.getBoundingClientRect()
-      } else {
-        throw new Error('Partial ' + this.name + ' has not elements')
-      }
-      this.marker.style.left = Math.round(bounds.left) + 'px'
-      this.marker.style.top = Math.round(bounds.top + window.scrollY) + 'px'
-      this.marker.style.height = Math.round(bounds.height) + 'px'
-      this.marker.style.width = Math.round(bounds.width) + 'px'
-      document.body.appendChild(this.marker)
+    if (this.highlighted) {
+      $(this.marker).css('opacity', 1)
+      this.sourceHeader.addClass('active')
     } else {
-      if (!this.marker.parentNode) {
-        return
-      }
-      document.body.removeChild(this.marker)
+      $(this.marker).css('opacity', 0.1)
+      this.sourceHeader.removeClass('active')
     }
+  }
+
+  adjustMarker () {
+    var _this = this
+    var bounds
+    if (!this.start && !this.end) {
+      // no elements (this should not happen)
+      throw new Error('Partial ' + this.name + ' has no elements')
+    } else if (this.start === this.end) {
+      // single element
+      bounds = this.start.getBoundingClientRect()
+    } else {
+      // multiple elements
+      let range = document.createRange()
+      range.setStart(this.start, 0)
+      range.setEnd(this.end, 0)
+      bounds = range.getBoundingClientRect()
+    }
+    this.marker.style.left = Math.round(bounds.left - 5) + 'px'
+    this.marker.style.top = Math.round(bounds.top + window.scrollY - 5) + 'px'
+    this.marker.style.height = Math.round(bounds.height + 10) + 'px'
+    this.marker.style.width = Math.round(bounds.width + 10) + 'px'
+    this.marker.style['z-index'] = this.zIndex
+    this.marker.style.opacity = 0.1
+    $(this.marker).attr('data-partial-name', this.name)
+    $(this.marker).mouseover(function (event) {
+      _this.highlight(true)
+    })
+    $(this.marker).mouseout(function (event) {
+      _this.highlight(false)
+    })
+    $(this.marker).click(function (event) {
+      _this.sourceHeader.click()
+      _this.sourceHeader[0].scrollIntoView()
+    })
   }
 
   scrollTo () {
     var top = this.elements[0].getBoundingClientRect().top
-    $('html, body').clearQueue().animate({ scrollTop: top + window.scrollY })
+    $('html, body').clearQueue().animate({scrollTop: top + window.scrollY})
   }
 }
 
 function createPartialTree () {
-  var partialTree = new PartialTreeNode('root', null, true)
+  var partialTree = new PartialTreeNode('root', null, null)
   var partialStack = [partialTree]
 
   var iterator = document.createNodeIterator(
-    $('.markdown-body')[0],
-    window.NodeFilter.SHOW_TEXT | window.NodeFilter.SHOW_ELEMENT | window.NodeFilter.SHOW_COMMENT,
-    {
-      acceptNode: function (node) {
-        if (node instanceof window.Comment) {
-          return window.NodeFilter.FILTER_ACCEPT
-        } else if (node instanceof window.Text && node.textContent.trim() !== '') {
-          return window.NodeFilter.FILTER_ACCEPT
-        } else if (node instanceof window.HTMLElement && node.childElementCount === 0) {
-          return window.NodeFilter.FILTER_ACCEPT
-        } else {
-          return window.NodeFilter.FILTER_REJECT
-        }
+    $('#markdown-body')[0],
+    window.NodeFilter.SHOW_ELEMENT | window.NodeFilter.SHOW_COMMENT,
+    function (node) {
+      if (node instanceof window.Comment) {
+        return window.NodeFilter.FILTER_ACCEPT
+      } else if (node instanceof window.HTMLElement && node.childElementCount === 0) {
+        return window.NodeFilter.FILTER_ACCEPT
+      } else {
+        return window.NodeFilter.FILTER_REJECT
       }
     }
   )
@@ -142,41 +154,57 @@ function createPartialTree () {
       break
     }
     if (x instanceof window.Comment) {
-      var match = x.textContent.match(/^\s*partial\s+name='([^']+)'\s*/)
+      var match = x.textContent.match(/^\s*part\s+name='([^']+)'\s*/)
       if (match) {
         var newPartial = partialStack[partialStack.length - 1].addChild(match[1], x)
         partialStack.push(newPartial)
-      } else if (x.textContent.match(/^\s*\/partial\s*/)) {
+      } else if (x.textContent.match(/^\s*\/part\s*/)) {
         partialStack.pop().finalize()
       }
     } else {
+      partialStack.forEach(function (partial) {
+        // Take element if non exists (i.e. first element)
+        partial.start = partial.start || x
+        // Take last element (overwerite previous)
+        partial.end = x
+      })
+      $(x).attr('data-content', partialStack.map(function (partial) {
+        return partial.name
+      }).join(' > '))
       partialStack[partialStack.length - 1].addDOMNode(x)
     }
   }
   return partialTree
 }
 
-// Render
-function render (partialTree) {
-  var ractive = new Ractive({
-    el: '#partial-tree',
-    template: '#navTemplate', //
-    partials: {navTreeNode: $('#navTreeNode').html()},
-    data: partialTree,
-    magic: true
-  })
-  ractive.on('label-enter', function (event) {
-    event.context.highlight(true)
-  })
-  ractive.on('label-click', function (event) {
-    event.context.scrollTo()
-  })
-  ractive.on('label-leave', function (event) {
-    event.context.highlight(false)
-  })
+function prepareTextNodes (rootElement) {
+  var iterator = document.createNodeIterator(rootElement, window.NodeFilter.SHOW_TEXT,
+    function (node) {
+      if (node.textContent.match(/^\s*$/) || node.parentNode.tagName === 'TEXT-WRAPPER') {
+        return window.NodeFilter.FILTER_REJECT
+      } else {
+        return window.NodeFilter.FILTER_ACCEPT
+      }
+    })
+  while (true) {
+    var x = iterator.nextNode()
+    if (!x) {
+      break
+    }
+    var wrapper = new TextWrapper()
+    x.parentNode.insertBefore(wrapper, x)
+    wrapper.appendChild(x)
+  }
 }
 
 $(function () {
-  var partialTree = createPartialTree()
-  render(partialTree)
+  $('pre code').each(function (i, block) {
+    hljs.highlightBlock(block)
+  })
+  prepareTextNodes($('#markdown-body')[0])
+  window.partialTree = createPartialTree()
+  //  render(partialTree)
+
+  $('.ui.accordion').accordion()
+  $('.tabular.menu .item').tab()
 })

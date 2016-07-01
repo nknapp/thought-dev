@@ -1,0 +1,44 @@
+<div class="ui fluid container">
+    <div class="ui two column padded grid">
+        <div id="parts" class="column">
+            <div class="ui very padded container">
+                <div class="ui styled accordion">
+                    <div class="title" data-part-name="templates/{{templateName}}">
+                        <i class="dropdown icon"></i> Template: {{templateName}}
+                    </div>
+                    <div class="content">
+                            <pre><code class="handlebars">
+                                {{~template.contents~}}
+                            </code></pre>
+                    </div>
+                    {{#each partials}}
+                        <div class="title" data-part-name="partials/{{@key}}">
+                            <i class="dropdown icon"></i> Partial: {{@key}}
+
+                        </div>
+                        <div class="content">
+                            <button class="ui labeled icon button">
+                                <i class="edit icon"></i>
+                                Edit
+                            </button>
+                            <button class="uic labeled icon button">
+                                <i class="undo icon"></i>
+                                Revert
+                            </button>
+                            <pre><code class="handlebars">
+                                {{~contents~}}
+                            </code></pre>
+                        </div>
+                    {{/each}}
+                </div>
+
+            </div>
+        </div>
+        <div class="ui container column">
+            <div class="ui raised segment" id="markdown-body">
+                {{{markdown}}}
+            </div>
+        </div>
+    </div>
+
+</div>
