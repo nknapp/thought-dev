@@ -117,6 +117,13 @@ class PartialTreeNode {
     $(this.marker).mouseout(function (event) {
       _this.highlight(false)
     })
+    $(this.sourceHeader).mouseover(function (event) {
+      _this.highlight(true)
+    })
+    $(this.sourceHeader).mouseout(function (event) {
+      _this.highlight(false)
+    })
+
     $(this.marker).click(function (event) {
       _this.sourceHeader.click()
       _this.sourceHeader[0].scrollIntoView()
