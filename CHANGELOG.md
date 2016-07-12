@@ -1,6 +1,13 @@
 # Release notes for `thought-dev`
 
 <a name="current-release"></a>
+# Version 0.1.1 (Tue, 12 Jul 2016 20:57:29 GMT)
+
+* [7a7cf1e](https://github.com/nknapp/thought-dev/commit/7a7cf1e) README typo - Nils Knappmeier
+* [40b9b4d](https://github.com/nknapp/thought-dev/commit/40b9b4d) Remove unused example - Nils Knappmeier
+
+
+
 # Version 0.1.0 (Tue, 12 Jul 2016 20:18:07 GMT)
 
 * [6533b67](https://github.com/nknapp/thought-dev/commit/6533b67) First working version (more or less) - Nils Knappmeier

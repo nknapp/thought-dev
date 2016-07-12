@@ -22,7 +22,7 @@ is somehow work in progress. I'm publishing it anyhow.**
 npm install -g thought-dev
 ```
 
- ## Usage
+## Usage
 
 Go the the project folder and run 
 
