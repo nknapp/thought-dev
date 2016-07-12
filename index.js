@@ -7,7 +7,7 @@ var thoughtRunner = new RunThought(cwd)
 var server = new Server(cwd, 3000, thoughtRunner)
 var watcher = new Watcher(cwd, thoughtRunner)
 
-watcher.on('updater', function (files) {
+watcher.on('update', function (files) {
   server.reload(files)
 })
 

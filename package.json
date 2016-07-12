@@ -6,6 +6,7 @@
     "type": "git",
     "url": "git@github.com:nknapp/thought-dev.git"
   },
+  "preferGlobal": true,
   "homepage": "https://github.com/nknapp/thought-dev",
   "author": {
     "name": "Nils Knappmeier",
@@ -18,7 +19,6 @@
   "bin": {
     "thought-dev": "bin/thought-dev.js"
   },
-  "main": "index.js",
   "license": "MIT",
   "scripts": {
     "preformat": "standard --version || npm -g install standard",
@@ -32,6 +32,7 @@
     "preversion": "npm run thoughtcheck"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
     "browser-sync": "^2.13.0",
     "chokidar": "^1.5.2",
     "connect-browser-sync": "^2.0.1",

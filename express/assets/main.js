@@ -23,6 +23,7 @@ class PartialTreeNode {
     this.startComment = startComment
     this.marker = new PartialMarker()
     this.sourceHeader = $('#parts [data-part-name="' + name + '.hbs"]')
+    this.accordionIndex = this.sourceHeader.prevAll('.title').length
     document.body.appendChild(this.marker)
   }
 
@@ -81,10 +82,10 @@ class PartialTreeNode {
     this.highlighted = enabled
     if (this.highlighted) {
       $(this.marker).css('opacity', 1)
-      this.sourceHeader.addClass('active')
+      this.sourceHeader.addClass('highlighted')
     } else {
       $(this.marker).css('opacity', 0.1)
-      this.sourceHeader.removeClass('active')
+      this.sourceHeader.removeClass('highlighted')
     }
   }
 
@@ -125,8 +126,7 @@ class PartialTreeNode {
     })
 
     $(this.marker).click(function (event) {
-      _this.sourceHeader.click()
-      _this.sourceHeader[0].scrollIntoView()
+      $('#parts').accordion('open', _this.accordionIndex)
     })
   }
 
@@ -212,6 +212,15 @@ $(function () {
   window.partialTree = createPartialTree()
   //  render(partialTree)
 
-  $('.ui.accordion').accordion()
+  $('#parts').accordion()
   $('.tabular.menu .item').tab()
+  /* One required, one optional variable */
+  $.fn.api.settings.api = {
+    'edit part': '/open-editor',
+    'revert part': '/revert'
+  }
+  $('button').api({
+    method: 'POST',
+    serializeForm: true
+  })
 })
