@@ -1,24 +1,12 @@
-<!-- part name='templates/README.md' -->
 # thought-dev 
 
-<!-- part name='partials/badges.md' -->
-<!-- part name='partials/badge/npm.md' -->
 [![NPM version](https://badge.fury.io/js/thought-dev.svg)](http://badge.fury.io/js/thought-dev)
- <!-- /part -->
-<!-- part name='partials/badge/travis.md' -->
 [![Travis Build Status](https://travis-ci.org/nknapp/thought-dev.svg?branch=master)](https://travis-ci.org/nknapp/thought-dev)
-<!-- /part -->
-<!-- part name='partials/badge/appveyor.md' -->
-<!-- /part -->
-<!-- part name='partials/badge/coveralls.md' -->
 [![Coverage Status](https://img.shields.io/coveralls/nknapp/thought-dev.svg)](https://coveralls.io/r/nknapp/thought-dev)
 
-<!-- /part -->
-<!-- /part -->
 
 > Development-Mode for Thought
 
-<!-- part name='partials/overview.md' -->
 This project is a development-mode for the [thought](https://npmjs.com/package/thought) project. It shows you, which
 partials are currently in use and allows you to override partials and store them in the appropriate
 locations.
@@ -27,17 +15,13 @@ locations.
 are no tests at all. And sometimes, the server just breaks down. The code is not clean and everything
 is somehow work in progress. I'm publishing it anyhow.**
 
-<!-- /part -->
 
-<!-- part name='partials/installation.md' -->
 # Installation
 
 ```
 npm install -g thought-dev
 ```
-<!-- /part -->
 
-<!-- part name='partials/usage.md' -->
  ## Usage
 
 Go the the project folder and run 
@@ -60,27 +44,18 @@ You will see the partials on the left and the contents of the README.md on the r
 * You can click on **Revert** to delete the local file, which will revert the contents of the default version from the Thought project.
 
 ![Editing the README](.thought/README.md.png)
-<!-- /part -->
 
-<!-- part name='partials/api.md' -->
-<!-- /part -->
 
-<!-- part name='partials/howitworks.md' -->
-<!-- /part -->
 
-<!-- part name='partials/license.md' -->
 ## License
 
 `thought-dev` is published under the MIT-license. 
 See [LICENSE.md](LICENSE.md) for details.
-<!-- /part -->
 
-<!-- part name='partials/changelog.md' -->
 ## Release-Notes
  
 For release notes, see [CHANGELOG.md](CHANGELOG.md)
- <!-- /part -->
-
+ 
 ## Contributing guidelines
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).<!-- /part -->
+See [CONTRIBUTING.md](CONTRIBUTING.md).
