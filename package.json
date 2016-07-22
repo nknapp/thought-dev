@@ -44,6 +44,7 @@
     "express-hbs": "^1.0.1",
     "express-markdown-router": "^1.1.0",
     "github-markdown-css": "^2.3.0",
+    "gitignore-globs": "^0.1.1",
     "highlightjs": "^8.7.0",
     "lodash": "^4.13.1",
     "q": "^1.4.1",
