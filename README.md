@@ -1,9 +1,8 @@
 # thought-dev 
 
 [![NPM version](https://badge.fury.io/js/thought-dev.svg)](http://badge.fury.io/js/thought-dev)
-[![Travis Build Status](https://travis-ci.org/nknapp/thought-dev.svg?branch=master)](https://travis-ci.org/nknapp/thought-dev)
+[![Build Status](https://travis-ci.org/nknapp/thought-dev.svg?branch=master)](https://travis-ci.org/nknapp/thought-dev)
 [![Coverage Status](https://img.shields.io/coveralls/nknapp/thought-dev.svg)](https://coveralls.io/r/nknapp/thought-dev)
-
 
 > Development-Mode for Thought
 
