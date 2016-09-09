@@ -1,6 +1,10 @@
 # Release notes for `thought-dev`
 
 <a name="current-release"></a>
+# Version 0.1.3 (Fri, 09 Sep 2016 06:52:47 GMT)
+
+* [896fe02](https://github.com/nknapp/thought-dev/commit/896fe02) Add webapp (express/-folder) to package.json/files - Nils Knappmeier
+
 # Version 0.1.2 (Fri, 09 Sep 2016 06:34:45 GMT)
 
 * [6eba638](https://github.com/nknapp/thought-dev/commit/6eba638) Handle runtime errors in Thought gracefully - Nils Knappmeier
