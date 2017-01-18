@@ -37,24 +37,24 @@
     "chokidar": "^1.5.2",
     "connect-browser-sync": "^2.0.1",
     "connect-static-transform": "^0.8.0",
-    "customize": "^0.8.4",
-    "customize-write-files": "^0.1.5",
+    "customize": "^1.1.0",
+    "customize-write-files": "^1.1.0",
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
     "express-hbs": "^1.0.1",
     "express-markdown-router": "^1.1.0",
     "github-markdown-css": "^2.3.0",
     "gitignore-globs": "^0.1.1",
-    "highlightjs": "^8.7.0",
+    "highlightjs": "^9.8.0",
     "lodash": "^4.13.1",
     "q": "^1.4.1",
     "q-io": "^1.13.2",
     "serve-index": "^1.8.0",
-    "thought": "^0.7.0"
+    "thought": "^0.10.0"
   },
   "devDependencies": {
-    "ghooks": "^1.0.3",
-    "mocha": "^2.3.3",
+    "ghooks": "^2.0.0",
+    "mocha": "^3.2.0",
     "thoughtful-release": "^0.3.0"
   },
   "standard": {
